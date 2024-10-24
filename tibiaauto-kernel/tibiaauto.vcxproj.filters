@@ -66,9 +66,6 @@
     <ClCompile Include="PythonEngine_fun.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="tibiaauto.rc">
@@ -131,9 +128,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PythonEngine_fun.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

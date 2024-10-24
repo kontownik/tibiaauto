@@ -2,6 +2,7 @@
 
 #include "tibiaauto_util.h"
 #include "Skin.h"
+#include <string>
 
 class TIBIAAUTOUTIL_API IModuleInterface
 {

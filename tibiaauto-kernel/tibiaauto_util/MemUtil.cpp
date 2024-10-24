@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "MemUtil.h"
 #include "psapi.h"
+#include <stdexcept>
 
 #ifdef _DEBUG
 #undef THIS_FILE
