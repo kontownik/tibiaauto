@@ -306,21 +306,21 @@ BOOL CTibiaautoDlg::OnInitDialog()
 	int m_memAddressRevealCName1 = CTibiaItem::getValueForConst("addrFunRevealCName1");
 	buf[0] = buf[1] = 0;
 	CMemUtil::getMemUtil().GetMemRange(m_processId, m_memAddressRevealCName1, m_memAddressRevealCName1 + 2, (char *)buf, 1);
-	if (buf[0] == 0x90 && buf[1] == 0x90)
-		versionOk = 1;
-	if ((buf[0] == 0x75 || buf[0] == 0xEB) && (buf[1] == 0x0A || buf[1] == 0x10 || buf[1] == 0x0E))
-		versionOk = 1;
+	//if (buf[0] == 0x90 && buf[1] == 0x90)
+	//	versionOk = 1;
+	//if ((buf[0] == 0x75 || buf[0] == 0xEB) && (buf[1] == 0x0A || buf[1] == 0x10 || buf[1] == 0x0E))
+	//	versionOk = 1;
 
-	if (!versionOk)
-	{
-		char outBuf[100];
+	//if (!versionOk)
+	//{
+	//	char outBuf[100];
 
-		sprintf(outBuf, "tibia.exe version mismatch! Terminating Tibia Auto! (%x  %x)", buf[0], buf[1]);
-		AfxMessageBox(outBuf);
+	//	sprintf(outBuf, "tibia.exe version mismatch! Terminating Tibia Auto! (%x  %x)", buf[0], buf[1]);
+	//	AfxMessageBox(outBuf);
 
-		EndDialog(IDCANCEL);
-		return TRUE;
-	}
+	//	EndDialog(IDCANCEL);
+	//	return TRUE;
+	//}
 
 
 	CMemUtil::getMemUtil().setGlobalProcessId(m_processId);
@@ -352,7 +352,7 @@ BOOL CTibiaautoDlg::OnInitDialog()
 	m_moduleMapShow      = CModuleLoader::LoadModule("mod_showmap", 0);
 	m_moduleMonsterShow  = CModuleLoader::LoadModule("mod_monstershow", 0);
 	m_moduleItemConfig   = CModuleLoader::LoadModule("mod_itemconfig", 0);
-	m_moduleAutoGo       = CModuleLoader::LoadModule("mod_autogo", 0);
+	//m_moduleAutoGo       = CModuleLoader::LoadModule("mod_autogo", 0);
 	m_moduleAutoAttack   = CModuleLoader::LoadModule("mod_cavebot", 0);
 	m_moduleRuneMaker    = CModuleLoader::LoadModule("mod_runemaker", 0);
 	m_moduleEater        = CModuleLoader::LoadModule("mod_eater", 0);
@@ -388,51 +388,6 @@ BOOL CTibiaautoDlg::OnInitDialog()
 	
 	CPythonEngine pythonEngine;
 	pythonEngine.init();
-
-	int ffBoxDisplay = 1;
-
-	char ffCheckString[1024];
-	unsigned long ffCheckLen = 1023;
-	ffCheckString[0] = '\0';
-	HKEY hkey = NULL;
-	if (!RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\Tibia Auto\\", 0, KEY_ALL_ACCESS, &hkey))
-	{
-		RegQueryValueEx(hkey, TEXT("FFcheck"), NULL, NULL, (unsigned char *)ffCheckString, &ffCheckLen);
-
-		if (strlen(ffCheckString))
-		{
-			// found
-			if (time(NULL) - atoi(ffCheckString) < 60 * 60 * 24 * 3)
-				ffBoxDisplay = 0;
-		}
-		char buf[128];
-		sprintf(buf, "%lld", time(NULL));
-		RegSetValueEx(hkey, TEXT("FFcheck"), 0, REG_SZ, (const unsigned char *)buf, strlen(buf) + 1);
-		RegCloseKey(hkey);
-	}
-
-	if (ffBoxDisplay)
-	{
-		// now check for firefox
-		if (!RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\Mozilla\\Mozilla Firefox\\", 0, KEY_READ, &hkey))
-		{
-			RegCloseKey(hkey);
-			ffBoxDisplay = 0;
-		}
-	}
-	if (ffBoxDisplay)
-	{
-		// now check for firefox
-		if (!RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\Mozilla\\Mozilla Firefox 2.0\\", 0, KEY_READ, &hkey))
-		{
-			RegCloseKey(hkey);
-			ffBoxDisplay = 0;
-		}
-	}
-
-	if (ffBoxDisplay)
-		if (AfxMessageBox("Tibia Auto has detected that you are not using Mozilla Firefox. It is recommend that you install it. Do you want to proceed with installation?", MB_YESNO) == IDYES)
-			::ShellExecute(NULL, NULL, "http://tibiaauto.net/firefox.html", NULL, NULL, SW_SHOWNORMAL);
 
 	m_moduleMapShow->showConfigDialog(); // As showmap modules runs its calculations in the window instead of a non-window thread, loading requires this to already be created.
 
@@ -788,7 +743,7 @@ void CTibiaautoDlg::OnToolMonsershow()
 
 void CTibiaautoDlg::OnToolAutogo()
 {
-	m_moduleAutoGo->showConfigDialog();
+	//m_moduleAutoGo->showConfigDialog();
 }
 
 void CTibiaautoDlg::OnToolAutofish()
@@ -800,8 +755,8 @@ void CTibiaautoDlg::refreshToolInfo()
 {
 	if (m_runeMaker.GetCheck() != m_moduleRuneMaker->isStarted())
 		m_runeMaker.SetCheck(m_moduleRuneMaker->isStarted());
-	if (m_autoGo.GetCheck() != m_moduleAutoGo->isStarted())
-		m_autoGo.SetCheck(m_moduleAutoGo->isStarted());
+	//if (m_autoGo.GetCheck() != m_moduleAutoGo->isStarted())
+	//	m_autoGo.SetCheck(m_moduleAutoGo->isStarted());
 	if (m_autoFish.GetCheck() != m_moduleFisher->isStarted())
 		m_autoFish.SetCheck(m_moduleFisher->isStarted());
 	if (m_autoAttack.GetCheck() != m_moduleAutoAttack->isStarted())
