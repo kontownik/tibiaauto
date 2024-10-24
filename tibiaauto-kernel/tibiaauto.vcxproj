@@ -111,10 +111,13 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(SolutionDir)tibiaauto-pub/libs/;C:\Python24\libs</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.20348.0\um\x86;$(SolutionDir)tibiaauto-pub/libs/;C:\Python24\libs</AdditionalLibraryDirectories>
       <AdditionalDependencies>version.lib;detours.lib;zdll.lib;ws2_32.lib;xerces-c_3.lib;zdll.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Profiling|Win32'">
     <ClCompile>
